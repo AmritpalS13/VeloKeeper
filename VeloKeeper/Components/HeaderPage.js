@@ -9,7 +9,7 @@ export default class HeaderPage extends Component {
     render() {
         return (
           <View style={headerStyle.container}>
-            <Image source={require('./logo.png')} style={{width:300, height:300}} />
+            <Image source={require('./logo.png')} style={{width:300, height:150}} />
           </View>
         );
     }
@@ -17,7 +17,7 @@ export default class HeaderPage extends Component {
 
 const headerStyle = StyleSheet.create({
     container: {
-        padding:10,
+        padding:5,
         alignItems:'center',
         backgroundColor:'#161514',
         borderBottomColor:'#fdb722',
