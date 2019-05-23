@@ -9,7 +9,7 @@ export default class HeaderPage extends Component {
     render() {
         return (
           <View style={headerStyle.container}>
-            <Image source={require('./logo.png')} style={{width:300, height:150}} />
+            <Image source={require('./VeloLogo.png')} style={{width:300, height:150}} />
           </View>
         );
     }
