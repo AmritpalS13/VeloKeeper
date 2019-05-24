@@ -20,26 +20,22 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-class NameTest extends Component {
-  render() {
-    console.log(this.props);
-    return(
-      <Text style={{fontSize:30, color:'white'}}>
-        {this.props.personName}
-      </Text>
-    );
-  }
-}
+// class NameTest extends Component {
+//   render() {
+//     console.log(this.props);
+//     return(
+//       <Text style={{fontSize:30, color:'white'}}>
+//         {this.props.personName}
+//       </Text>
+//     );
+//   }
+// }
 class CardHandler extends Component {
-
   render() {
+    console.log(this.props.userData);
     return (
       <View>
-          {this.props.userData.map( (user) => {
-            return(
-              <NameTest personName={user.name} />
-            );
-          })}
+        <PlayerCards data={this.props.userData} />
       </View>
     );
   }
