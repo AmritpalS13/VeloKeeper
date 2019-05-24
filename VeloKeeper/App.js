@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, ImageBackground, Image, Button, ScrollView, StatusBar, TextInput} from 'react-native';
+import {Platform, StyleSheet, Text, View, ImageBackground, Image, Button, ScrollView, StatusBar, TextInput, Alert} from 'react-native';
 
 //Importing my Components below,
 import HeaderPage from './Components/HeaderPage.js'//THe header page.
@@ -20,16 +20,7 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-// class NameTest extends Component {
-//   render() {
-//     console.log(this.props);
-//     return(
-//       <Text style={{fontSize:30, color:'white'}}>
-//         {this.props.personName}
-//       </Text>
-//     );
-//   }
-// }
+
 class CardHandler extends Component {
   render() {
     console.log(this.props.userData);
@@ -46,18 +37,24 @@ export default class App extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      nameBuffer: ' ',
+      bikeBuffer: ' ',
+      timeBuffer: ' ',
       playerArray: [
       {
+        id:1,
         name:'Paul', 
         bikeNumber:'13', 
         time:'13.00'
       },
       {
+        id:2,
         name:'Chris froome', 
         bikeNumber:'13', 
         time:'13.00'
       },
       {
+        id:3,
         name:'Sara', 
         bikeNumber:'13', 
         time:'13.00'
@@ -67,6 +64,21 @@ export default class App extends Component{
   }
 
   render() {
+    showData = () => {
+      var tempArray = this.state.playerArray;
+      tempArray.push({
+        id: 5,
+        name:this.state.nameBuffer,
+        bikeNumber:this.state.bikeBuffer,
+        time:this.state.timeBuffer
+      });
+      this.setState({
+        nameBuffer: ' ',
+        bikeBuffer: ' ',
+        timeBuffer: ' '
+      });
+      console.log(tempArray);
+    }
     return (
       <View style={{flex:2,backgroundColor:'#737373'}}>
         <StatusBar backgroundColor='#990000' barStyle='light-content' />
@@ -83,13 +95,30 @@ export default class App extends Component{
                 <Text style={{paddingLeft:15, color:'white'}}>Prediction</Text> 
               </View>
               <View style={inputAreaStyle.inputs}>
-                <TextInput placeholderTextColor='white' style={{paddingLeft:15, color:'white'}}placeholder="Enter Name" />
-                <TextInput placeholderTextColor='white' style={{paddingLeft:5, color:'white'}}placeholder="Enter Bike #" />
-                <TextInput placeholderTextColor='white' style={{color:'white'}}placeholder="Enter Time" />
+                <TextInput 
+                  placeholderTextColor='white' 
+                  style={{paddingLeft:15, color:'white'}}
+                  placeholder="Enter name"
+                  onChangeText={(text) => this.setState({nameBuffer:text})} 
+                  clearButtonMode='always'
+                />
+                <TextInput 
+                  placeholderTextColor='white' 
+                  style={{paddingLeft:5, color:'white'}}
+                  placeholder="Enter Bike #"
+                  onChangeText={(text) => this.setState({bikeBuffer:text})}  
+                />
+                <TextInput 
+                  placeholderTextColor='white' 
+                  style={{color:'white'}}
+                  placeholder="Enter Time"
+                  onChangeText={(text) => this.setState({timeBuffer:text})}  
+                />
               </View>
-              <Button color='#990000' title="Submit" /> 
+              {/*The button below will submit the adding of a cyclist to the race, and will be added to the array.*/}
+              <Button color='#990000' title="Submit"  onPress={showData}/> 
             </View>
-            {/* <Button title="Submit" />         */}
+            
           <ScrollView>
             <CardHandler userData={this.state.playerArray}/>
       
