@@ -20,18 +20,56 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-
+class NameTest extends Component {
+  render() {
+    console.log(this.props);
+    return(
+      <Text style={{fontSize:30, color:'white'}}>
+        {this.props.personName}
+      </Text>
+    );
+  }
+}
 class CardHandler extends Component {
+
   render() {
     return (
       <View>
-        <PlayerCards />
+          {this.props.userData.map( (user) => {
+            return(
+              <NameTest personName={user.name} />
+            );
+          })}
       </View>
     );
   }
 }
 
 export default class App extends Component{
+  //The following will be testing the passing of state as a prop to the PlayerCard,
+  constructor(props) {
+    super(props);
+    this.state = {
+      playerArray: [
+      {
+        name:'Paul', 
+        bikeNumber:'13', 
+        time:'13.00'
+      },
+      {
+        name:'Chris froome', 
+        bikeNumber:'13', 
+        time:'13.00'
+      },
+      {
+        name:'Sara', 
+        bikeNumber:'13', 
+        time:'13.00'
+      }
+      ]
+    }
+  }
+
   render() {
     return (
       <View style={{flex:2,backgroundColor:'#737373'}}>
@@ -44,22 +82,21 @@ export default class App extends Component{
             {/*This will be a testing of the input section*/}
             <View style={inputAreaStyle.container}>
               <View style={inputAreaStyle.inputs}>
-                <TextInput placeholderTextColor='white' style={{paddingLeft:15}}placeholder="Enter Name" />
-                <TextInput placeholderTextColor='white' style={{paddingRight:1}}placeholder="Enter Bike #" />
-                <TextInput placeholderTextColor='white' style={{paddingRight:15}}placeholder="Enter Time" />
+                <Text style={{paddingLeft:15, color:'white'}}>Name</Text>
+                <Text style={{color:'white'}}>Bike Number</Text>
+                <Text style={{paddingLeft:15, color:'white'}}>Prediction</Text> 
               </View>
-            <Button color='firebrick' title="Submit" /> 
+              <View style={inputAreaStyle.inputs}>
+                <TextInput placeholderTextColor='white' style={{paddingLeft:15, color:'white'}}placeholder="Enter Name" />
+                <TextInput placeholderTextColor='white' style={{paddingLeft:5, color:'white'}}placeholder="Enter Bike #" />
+                <TextInput placeholderTextColor='white' style={{color:'white'}}placeholder="Enter Time" />
+              </View>
+              <Button color='#990000' title="Submit" /> 
             </View>
             {/* <Button title="Submit" />         */}
           <ScrollView>
-            <CardHandler />
-            <CardHandler />
-            <CardHandler />
-            <CardHandler />
-            <CardHandler />
-            <CardHandler />
-            <CardHandler />
-            <CardHandler />
+            <CardHandler userData={this.state.playerArray}/>
+      
           </ScrollView>
 
         </ImageBackground>
@@ -72,8 +109,10 @@ export default class App extends Component{
 const inputAreaStyle = StyleSheet.create({
   container: {
     paddingBottom:8,
+    borderBottomWidth:2,
+    borderBottomColor:'#fdb722',
     // flexDirection:'row',
-    backgroundColor:'rgba(52,52,52,0.8)',
+    backgroundColor:'#161514',
     // alignItems:'center',
     // justifyContent:'space-between'
   },
