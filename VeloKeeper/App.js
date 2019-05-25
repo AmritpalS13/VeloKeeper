@@ -12,6 +12,7 @@ import {Platform, StyleSheet, Text, View, ImageBackground, Image, Button, Scroll
 //Importing my Components below,
 import HeaderPage from './Components/HeaderPage.js'//THe header page.
 import PlayerCards from './Components/PlayerCards.js'//Player cards
+import PlayerManager from './Components/PlayerManager.js' // way to manage the cyclist's
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,17 +21,16 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-
-class CardHandler extends Component {
-  render() {
-    console.log(this.props.userData);
-    return (
-      <View>
-        <PlayerCards data={this.props.userData} />
-      </View>
-    );
-  }
-}
+// class CardHandler extends Component {
+//   render() {
+    
+//     return (
+//       <View>
+//         <PlayerCards data={this.props.userData} />
+//       </View>
+//     );
+//   }
+// }
 
 export default class App extends Component{
   //The following will be testing the passing of state as a prop to the PlayerCard,
@@ -97,20 +97,20 @@ export default class App extends Component{
               <View style={inputAreaStyle.inputs}>
                 <TextInput 
                   placeholderTextColor='white' 
-                  style={{paddingLeft:15, color:'white'}}
+                  style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
                   placeholder="Enter name"
                   onChangeText={(text) => this.setState({nameBuffer:text})} 
                   clearButtonMode='always'
                 />
                 <TextInput 
                   placeholderTextColor='white' 
-                  style={{paddingLeft:5, color:'white'}}
+                  style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
                   placeholder="Enter Bike #"
                   onChangeText={(text) => this.setState({bikeBuffer:text})}  
                 />
                 <TextInput 
                   placeholderTextColor='white' 
-                  style={{color:'white'}}
+                  style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
                   placeholder="Enter Time"
                   onChangeText={(text) => this.setState({timeBuffer:text})}  
                 />
@@ -120,7 +120,8 @@ export default class App extends Component{
             </View>
             
           <ScrollView>
-            <CardHandler userData={this.state.playerArray}/>
+            <PlayerManager info={this.state.playerArray}/>
+            {/* <CardHandler userData={this.state.playerArray}/> */}
       
           </ScrollView>
 
@@ -146,7 +147,7 @@ const inputAreaStyle = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between'
-  } 
+  }, 
 })
 //This style sheet came with first build.
 const styles = StyleSheet.create({

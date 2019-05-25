@@ -21,13 +21,7 @@ import {Platform, StyleSheet, Text, View, Image, Button, Alert} from 'react-nati
 //         );
 //     }
 // }
-export default class PlayerCards extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            value:'testing'
-        };
-    }
+export default class TestingCards extends Component {
     buttonAction = () => {
         Alert.alert(this.state.value);
     }
@@ -35,7 +29,7 @@ export default class PlayerCards extends Component {
         console.log(this.props);
         return (
             <View>
-                {this.props.data.map(
+                {/* {this.props.data.map(
                     (userInformation) => {
                         return(
                             <View style={playerCardsStyle.container}>
@@ -49,12 +43,20 @@ export default class PlayerCards extends Component {
                             </View>
                         );
                     }
-                )}
+                )} */}
+                                 <View style={playerCardsStyle.container}>
+                                <Text style={{color:'white', textAlign:'left'}}>Name : {this.props.name}</Text>
+                                <Text style={{color:'white'}}>Bike Number : {this.props.bike}</Text>
+                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                    <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text> 
+                                    <Text style={{color:'white', paddingBottom:10}}>Actual:</Text>
+                                </View>
+                                <Button color='#990000' title="start" onPress={this.buttonAction} />  
+                            </View>
             </View>
         )
     }
 }
-
 const playerCardsStyle = StyleSheet.create({
     container: {
         textAlign:'left',

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, Button, Alert} from 'react-native';
 
-
-
+import PlayerCards from './PlayerCards'
+import TestingCards from './TestingCards'
 /*The following is the header page, it's going to contain no inputs
     for the user. */
 
@@ -21,36 +21,21 @@ import {Platform, StyleSheet, Text, View, Image, Button, Alert} from 'react-nati
 //         );
 //     }
 // }
-export default class PlayerCards extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            value:'testing'
-        };
-    }
-    buttonAction = () => {
-        Alert.alert(this.state.value);
-    }
+
+export default class PlayerManager extends Component {
     render() {
-        console.log(this.props);
+        this.props.info.map((player) => console.log(player.name))
         return (
             <View>
-                {this.props.data.map(
-                    (userInformation) => {
+                {this.props.info.map(
+                    (information) => {
                         return(
-                            <View style={playerCardsStyle.container}>
-                                <Text style={{color:'white', textAlign:'left'}}>Name : </Text>
-                                <Text style={{color:'white'}}>Bike Number : </Text>
-                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                                    <Text style={{color:'white', paddingBottom:10}}>Prediction : </Text> 
-                                    <Text style={{color:'white', paddingBottom:10}}>Actual:</Text>
-                                </View>
-                                <Button color='#990000' title="start" onPress={this.buttonAction} />  
-                            </View>
+                            <TestingCards key={information.id} name={information.name} bike={information.bikeNumber} timeValue={information.time} /> 
                         );
                     }
                 )}
-            </View>
+                
+            </View>    
         )
     }
 }
