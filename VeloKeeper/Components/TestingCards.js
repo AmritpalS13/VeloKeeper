@@ -21,11 +21,24 @@ import {Platform, StyleSheet, Text, View, Image, Button, Alert} from 'react-nati
 //         );
 //     }
 // }
+/*With this method I am able to pass down each individual item, as a prop in to this component so i Can
+    then create local states for each class instance which will be usefule when dealing with the timer */
 export default class TestingCards extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userKey: this.props.key,
+            userName: this.props.name,
+            userBikeNumber: this.props.bike,
+            userTimePrediction: this.props.timeValue,
+        }
+    }
+    
     buttonAction = () => {
-        Alert.alert(this.state.value);
+        Alert.alert("The user data", this.state.userName + ' - ' + this.state.userBikeNumber + ' - ' + this.state.userTimePrediction);
     }
     render() {
+        var isRunning = true;
         console.log(this.props);
         return (
             <View>
@@ -51,6 +64,7 @@ export default class TestingCards extends Component {
                                     <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text> 
                                     <Text style={{color:'white', paddingBottom:10}}>Actual:</Text>
                                 </View>
+                                {}
                                 <Button color='#990000' title="start" onPress={this.buttonAction} />  
                             </View>
             </View>
