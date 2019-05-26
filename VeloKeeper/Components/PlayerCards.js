@@ -12,14 +12,24 @@ export default class PlayerCards extends Component {
             userName: this.props.name,
             userBikeNumber: this.props.bike,
             userTimePrediction: this.props.timeValue,
-            isRunning:true,
+            isRunning:false,
+            startTime: 0,
+            finishTime: 0,
+            score: 0,
         }
     }
     buttonAction = () => {
+        if(this.state.isRunning) {
+            let time = new Date().toLocaleTimeString();
+            this.setState({finishTime:time}); 
+         } else if(!(this.state.isRunning)) {
+             let start = new Date().toLocaleTimeString();
+             this.setState({startTime:start});
+         }
         this.setState({isRunning:!(this.state.isRunning)});
     }
     renderButtonMode() {
-        if(this.state.isRunning) {
+        if(!(this.state.isRunning)) {
             return  <Button color='#990000' title="start" onPress={this.buttonAction} />
         } else {
             return  <Button color='#fdb722' title="finish" onPress={this.buttonAction} />
@@ -30,11 +40,14 @@ export default class PlayerCards extends Component {
         return (
             <View>
                 <View style={playerCardsStyle.container}>
-                    <Text style={{color:'white', textAlign:'left'}}>Name : {this.props.name}</Text>
+                    <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                        <Text style={{color:'white', textAlign:'left'}}>Name : {this.props.name}</Text>
+                        <Text style={{color:'white'}}>finishTime : {this.state.finishTime}</Text> 
+                    </View>
                     <Text style={{color:'white'}}>Bike Number : {this.props.bike}</Text>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text> 
-                        <Text style={{color:'white', paddingBottom:10}}>Actual:</Text>
+                        <Text style={{color:'white', paddingBottom:10}}>Start time: {this.state.startTime}</Text>
                     </View>
                     {this.renderButtonMode()}
                     {/* <Button color='#990000' title="start" onPress={this.buttonAction} />   */}
