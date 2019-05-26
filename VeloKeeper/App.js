@@ -1,10 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ImageBackground, Image, Button, ScrollView, StatusBar, TextInput, Alert} from 'react-native';
@@ -14,23 +8,6 @@ import HeaderPage from './Components/HeaderPage.js'//THe header page.
 import PlayerCards from './Components/PlayerCards.js'//Player cards
 import PlayerManager from './Components/PlayerManager.js' // way to manage the cyclist's
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-// class CardHandler extends Component {
-//   render() {
-    
-//     return (
-//       <View>
-//         <PlayerCards data={this.props.userData} />
-//       </View>
-//     );
-//   }
-// }
 
 export default class App extends Component{
   //The following will be testing the passing of state as a prop to the PlayerCard,
