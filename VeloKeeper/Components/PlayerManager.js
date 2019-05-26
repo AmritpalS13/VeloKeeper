@@ -2,25 +2,6 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, Button, Alert} from 'react-native';
 
 import PlayerCards from './PlayerCards'
-import TestingCards from './TestingCards'
-/*The following is the header page, it's going to contain no inputs
-    for the user. */
-
-// export default class PlayerCards extends Component {
-//     render() {
-//         return (
-//             <View style={playerCardsStyle.container}>
-//                <Text style={{color:'white', textAlign:'left'}}>Name :</Text>
-//                <Text style={{color:'white'}}>Bike Number </Text>
-//                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-//                <Text style={{color:'white', paddingBottom:10}}>Prediction :</Text> 
-//                <Text style={{color:'white', paddingBottom:10}}>Actual:</Text>
-//                </View>
-//                <Button color='#990000' title="start" />              
-//             </View>
-//         );
-//     }
-// }
 
 export default class PlayerManager extends Component {
     render() {
@@ -30,7 +11,8 @@ export default class PlayerManager extends Component {
                 {this.props.info.map(
                     (information) => {
                         return(
-                            <TestingCards key={information.id} name={information.name} bike={information.bikeNumber} timeValue={information.time} /> 
+                            //Below is a testing compoenent that needs to be changed and adjusted.
+                            <PlayerCards key={information.id} name={information.name} bike={information.bikeNumber} timeValue={information.time} /> 
                         );
                     }
                 )}
