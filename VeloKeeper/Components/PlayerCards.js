@@ -12,12 +12,15 @@ export default class PlayerCards extends Component {
             userName: this.props.name,
             userBikeNumber: this.props.bike,
             userTimePrediction: this.props.timeValue,
-            isRunning:false,
+            
+            //The state variables below will deal with runtime actions.
+            isRunning:false,//toggle for if they're racing or not.
             startTime: 0,
             finishTime: 0,
             score: 0,
         }
     }
+    //This method below will deal with  the state of each cyclist's race time and start!
     buttonAction = () => {
         if(this.state.isRunning) {
             let time = new Date().toLocaleTimeString();
@@ -28,6 +31,7 @@ export default class PlayerCards extends Component {
          }
         this.setState({isRunning:!(this.state.isRunning)});
     }
+    //THe method below returns a special type of button depending on the state of the race.
     renderButtonMode() {
         if(!(this.state.isRunning)) {
             return  <Button color='#990000' title="start" onPress={this.buttonAction} />
@@ -41,7 +45,7 @@ export default class PlayerCards extends Component {
             <View>
                 <View style={playerCardsStyle.container}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                        <Text style={{color:'white', textAlign:'left'}}>Name : {this.props.name}</Text>
+                        <Text style={{color:'white', textAlign:'left', fontSize:20}}>Name : {this.props.name}</Text>
                         <Text style={{color:'white'}}>finishTime : {this.state.finishTime}</Text> 
                     </View>
                     <Text style={{color:'white'}}>Bike Number : {this.props.bike}</Text>
@@ -49,8 +53,8 @@ export default class PlayerCards extends Component {
                         <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text> 
                         <Text style={{color:'white', paddingBottom:10}}>Start time: {this.state.startTime}</Text>
                     </View>
+                    {/*Rendering the buton*/}
                     {this.renderButtonMode()}
-                    {/* <Button color='#990000' title="start" onPress={this.buttonAction} />   */}
                 </View>
             </View>
         )
@@ -66,7 +70,5 @@ const playerCardsStyle = StyleSheet.create({
         padding:15,
         margin:15,
         backgroundColor:'rgba(52,52,52,0.8)',
-        // alignItems:'center',
-        // justifyContent:'center',
     }
 });

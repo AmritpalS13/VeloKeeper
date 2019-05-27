@@ -5,13 +5,13 @@ import PlayerCards from './PlayerCards'
 
 export default class PlayerManager extends Component {
     render() {
-        this.props.info.map((player) => console.log(player.name))
         return (
+            /*The code below will take each player object that was in App.js and pass each person as a prop to the PlyaerCards class component
+                to generate each playercaed with each unique data for the cards! */
             <View>
                 {this.props.info.map(
                     (information) => {
                         return(
-                            //Below is a testing compoenent that needs to be changed and adjusted.
                             <PlayerCards key={information.id} name={information.name} bike={information.bikeNumber} timeValue={information.time} /> 
                         );
                     }
@@ -31,7 +31,5 @@ const playerCardsStyle = StyleSheet.create({
         padding:15,
         margin:15,
         backgroundColor:'rgba(52,52,52,0.8)',
-        // alignItems:'center',
-        // justifyContent:'center',
     }
 });
