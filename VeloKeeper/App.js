@@ -4,9 +4,9 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, ImageBackground, Image, Button, ScrollView, StatusBar, TextInput, Alert} from 'react-native';
 
 //Importing my Components below,
-import HeaderPage from './Components/HeaderPage.js'//THe header page.
-import PlayerCards from './Components/PlayerCards.js'//Player cards
-import PlayerManager from './Components/PlayerManager.js' // way to manage the cyclist's
+import HeaderPage from './Components/HeaderPage.js'//THe header page. This will load in the top part of the app.
+import PlayerCards from './Components/PlayerCards.js'//Player cards this is the cards that contain the user infomatio 
+import PlayerManager from './Components/PlayerManager.js' // way to manage the cyclist's playerCards, moer specifically the porps.
 
 
 export default class App extends Component{
@@ -108,7 +108,7 @@ export default class App extends Component{
   }
 }
 
-
+//Below is the  styling for the input section of the main interface, to input the cyclist's involved.
 const inputAreaStyle = StyleSheet.create({
   container: {
     paddingBottom:8,
@@ -126,22 +126,3 @@ const inputAreaStyle = StyleSheet.create({
     justifyContent:'space-between'
   }, 
 })
-//This style sheet came with first build.
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
