@@ -54,7 +54,7 @@ export default class App extends Component{
         bikeBuffer: ' ',
         timeBuffer: ' '
       });
-      console.log(tempArray);
+      
     }
     return (
       <View style={{flex:2,backgroundColor:'#737373'}}>

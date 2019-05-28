@@ -12,52 +12,33 @@ export default class PlayerCards extends Component {
             userName: this.props.name,
             userBikeNumber: this.props.bike,
             userTimePrediction: this.props.timeValue,
-            
-            //Testing stuff,
-            testTimeStart:0,
-            testTimeFinish:0,
-            testScore:0,
 
             //The state variables below will deal with runtime actions.
             isRunning:false,//toggle for if they're racing or not.
+            finishedRace: false,
             startTime: 0,
             finishTime: 0,
             score: 0,
         }
     }
-    testScoreMethods() {
-        let testUserScore = 0;
-        let testStart = this.state.testTimeStart;
-        let testFinish = this.state.testTimeFinish;
-        testUserScore = testFinish - testStart;
-        this.setState({testScore:testUserScore});
-    }
-    calculateScore() {
-        let userScore = 0;
-        let finish = Date.parse(this.state.finishTime);
-        let start = Date.parse(this.state.startTime);
-        userScore = finish - start;
-        userScore = Math.floor(userScore/1000);
-        this.setState({score:userScore});
-        Alert.alert("Score has been logged");
-    }
+
     //This method below will deal with  the state of each cyclist's race time and start!
     buttonAction = () => {
         if(this.state.isRunning) {
             //If the user is done the race, this block of code will execute.
-            let time = new Date().toLocaleTimeString();
-            let testTimeFin = new Date().toLocaleTimeString();
-            // testTimeFin = Date.parse(testTimeFin);
-            this.setState({testTimeFinish:testTimeFin});
-            this.setState({finishTime:time});
-            // this.calculateScore();
-            // this.testScoreMethods(); 
-         } else if(!(this.state.isRunning)) {
-             let start = new Date().toLocaleTimeString();
-             let testStart = new Date().toLocaleTimeString();
-            //  testStart = Date.parse(testStart);
-             this.setState({testTimeStart:testStart});
-             this.setState({startTime:start});
+            let finish = new Date().toLocaleTimeString();
+            finish = finish.split(':');
+            finish = finish.join('');
+            finish = parseInt(finish);
+            this.setState({finishTime:finish});
+            console.log(this.state.finishTime);
+         }else if(!(this.state.isRunning)) {
+            let start = new Date().toLocaleTimeString();
+            start = start.split(':');
+            start = start.join('');
+            start = parseInt(start);
+            this.setState({startTime:start});
+            console.log(this.state.startTime);
          }
         this.setState({isRunning:!(this.state.isRunning)});
     }
@@ -70,19 +51,19 @@ export default class PlayerCards extends Component {
         }
     }
     render() {
-        console.log(this.props);
+        
         return (
             <View>
                 <View style={playerCardsStyle.container}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <Text style={{color:'white', textAlign:'left', fontSize:20}}>{this.props.name}</Text>
-                        <Text style={{color:'white'}}>TestFin: {this.state.testTimeFinish}</Text> 
+                        <Text style={{color:'white'}}>TestFin: {this.state.finishTime}</Text>
                     </View>
                     <Text style={{color:'white',fontSize:20}}>N/A</Text>
                     <Text style={{color:'white'}}>Bike Number : {this.props.bike}</Text>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                        <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text> 
-                        <Text style={{color:'white', paddingBottom:10}}>Start time: {this.state.testTimeStart}</Text>
+                        <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text>
+                        <Text style={{color:'white', paddingBottom:10}}>Start time: {this.state.startTime}</Text>
                     </View>
                     {/*Rendering the buton*/}
                     {this.renderButtonMode()}
