@@ -13,6 +13,11 @@ export default class PlayerCards extends Component {
             userBikeNumber: this.props.bike,
             userTimePrediction: this.props.timeValue,
             
+            //Testing stuff,
+            testTimeStart:0,
+            testTimeFinish:0,
+            testScore:0,
+
             //The state variables below will deal with runtime actions.
             isRunning:false,//toggle for if they're racing or not.
             startTime: 0,
@@ -20,13 +25,38 @@ export default class PlayerCards extends Component {
             score: 0,
         }
     }
+    testScoreMethods() {
+        let testUserScore = 0;
+        let testStart = this.state.testTimeStart;
+        let testFinish = this.state.testTimeFinish;
+        testUserScore = testFinish - testStart;
+        this.setState({testScore:testUserScore});
+    }
+    calculateScore() {
+        let userScore = 0;
+        let finish = Date.parse(this.state.finishTime);
+        let start = Date.parse(this.state.startTime);
+        userScore = finish - start;
+        userScore = Math.floor(userScore/1000);
+        this.setState({score:userScore});
+        Alert.alert("Score has been logged");
+    }
     //This method below will deal with  the state of each cyclist's race time and start!
     buttonAction = () => {
         if(this.state.isRunning) {
+            //If the user is done the race, this block of code will execute.
             let time = new Date().toLocaleTimeString();
-            this.setState({finishTime:time}); 
+            let testTimeFin = new Date().toLocaleTimeString();
+            // testTimeFin = Date.parse(testTimeFin);
+            this.setState({testTimeFinish:testTimeFin});
+            this.setState({finishTime:time});
+            // this.calculateScore();
+            // this.testScoreMethods(); 
          } else if(!(this.state.isRunning)) {
              let start = new Date().toLocaleTimeString();
+             let testStart = new Date().toLocaleTimeString();
+            //  testStart = Date.parse(testStart);
+             this.setState({testTimeStart:testStart});
              this.setState({startTime:start});
          }
         this.setState({isRunning:!(this.state.isRunning)});
@@ -45,13 +75,14 @@ export default class PlayerCards extends Component {
             <View>
                 <View style={playerCardsStyle.container}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                        <Text style={{color:'white', textAlign:'left', fontSize:20}}>Name : {this.props.name}</Text>
-                        <Text style={{color:'white'}}>finishTime : {this.state.finishTime}</Text> 
+                        <Text style={{color:'white', textAlign:'left', fontSize:20}}>{this.props.name}</Text>
+                        <Text style={{color:'white'}}>TestFin: {this.state.testTimeFinish}</Text> 
                     </View>
+                    <Text style={{color:'white',fontSize:20}}>N/A</Text>
                     <Text style={{color:'white'}}>Bike Number : {this.props.bike}</Text>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text> 
-                        <Text style={{color:'white', paddingBottom:10}}>Start time: {this.state.startTime}</Text>
+                        <Text style={{color:'white', paddingBottom:10}}>Start time: {this.state.testTimeStart}</Text>
                     </View>
                     {/*Rendering the buton*/}
                     {this.renderButtonMode()}
