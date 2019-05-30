@@ -21,24 +21,19 @@ export default class PlayerCards extends Component {
             score: 0,
         }
     }
-
+    
     //This method below will deal with  the state of each cyclist's race time and start!
     buttonAction = () => {
         if(this.state.isRunning) {
             //If the user is done the race, this block of code will execute.
             let finish = new Date().toLocaleTimeString();
-            finish = finish.split(':');
-            finish = finish.join('');
-            finish = parseInt(finish);
             this.setState({finishTime:finish});
-            console.log(this.state.finishTime);
+            this.setState({finishedRace:true});
+            
          }else if(!(this.state.isRunning)) {
             let start = new Date().toLocaleTimeString();
-            start = start.split(':');
-            start = start.join('');
-            start = parseInt(start);
             this.setState({startTime:start});
-            console.log(this.state.startTime);
+            
          }
         this.setState({isRunning:!(this.state.isRunning)});
     }
@@ -50,8 +45,28 @@ export default class PlayerCards extends Component {
             return  <Button color='#fdb722' title="finish" onPress={this.buttonAction} />
         }
     }
+    determineRace() {
+        if(this.state.finishedRace) {
+            var userStart = this.state.startTime;
+            userStart = userStart.split(':');
+            userStart = userStart.join('');
+            userStart = parseInt(userStart);
+            var userFinish = this.state.finishTime;
+            userFinish = userFinish.split(':');
+            userFinish = userFinish.join('');
+            userFinish = parseInt(userFinish);
+            var userScore = userFinish - userStart;
+            console.log("Data from race ", userStart + ' ' + userFinish);
+            console.log('Difereint in time = ', userFinish - userStart);
+            // this.setState({score: userScore});
+        } else {
+            console.log('not done');
+        }
+    }
+
     render() {
-        
+        console.log(this.state.finishedRace);
+        var userScore = 0;
         return (
             <View>
                 <View style={playerCardsStyle.container}>
@@ -59,7 +74,7 @@ export default class PlayerCards extends Component {
                         <Text style={{color:'white', textAlign:'left', fontSize:20}}>{this.props.name}</Text>
                         <Text style={{color:'white'}}>TestFin: {this.state.finishTime}</Text>
                     </View>
-                    <Text style={{color:'white',fontSize:20}}>N/A</Text>
+                    <Text style={{color:'white',fontSize:20}}>{this.state.score}</Text>
                     <Text style={{color:'white'}}>Bike Number : {this.props.bike}</Text>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text>
@@ -67,6 +82,7 @@ export default class PlayerCards extends Component {
                     </View>
                     {/*Rendering the buton*/}
                     {this.renderButtonMode()}
+                    {this.determineRace()}
                 </View>
             </View>
         )
