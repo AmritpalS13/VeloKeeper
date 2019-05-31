@@ -13,6 +13,10 @@ export default class PlayerCards extends Component {
             userBikeNumber: this.props.bike,
             userTimePrediction: this.props.timeValue,
 
+            startSeconds: 0,
+            finishSeconds: 0,
+            scoreSeconds: 0,
+
             //The state variables below will deal with runtime actions.
             isRunning:false,//toggle for if they're racing or not.
             finishedRace: false,
@@ -27,11 +31,19 @@ export default class PlayerCards extends Component {
         if(this.state.isRunning) {
             //If the user is done the race, this block of code will execute.
             let finish = new Date().toLocaleTimeString();
+            var finishSeconds = Date.now();
+            var finalScore = finishSeconds - this.state.startSeconds;
+            finalScore = finalScore / 1000;
+            finalScore = finalScore / 60;
+            this.setState({score:finalScore});
             this.setState({finishTime:finish});
             this.setState({finishedRace:true});
             
          }else if(!(this.state.isRunning)) {
             let start = new Date().toLocaleTimeString();
+            let userStarted = Date.now();
+
+            this.setState({startSeconds:userStarted});
             this.setState({startTime:start});
             
          }
@@ -45,36 +57,31 @@ export default class PlayerCards extends Component {
             return  <Button color='#fdb722' title="finish" onPress={this.buttonAction} />
         }
     }
-    determineRace() {
-        if(this.state.finishedRace) {
-            var userStart = this.state.startTime;
-            userStart = userStart.split(':');
-            userStart = userStart.join('');
-            userStart = parseInt(userStart);
-            var userFinish = this.state.finishTime;
-            userFinish = userFinish.split(':');
-            userFinish = userFinish.join('');
-            userFinish = parseInt(userFinish);
-            var userScore = userFinish - userStart;
-            console.log("Data from race ", userStart + ' ' + userFinish);
-            console.log('Difereint in time = ', userFinish - userStart);
-            // this.setState({score: userScore});
-        } else {
-            console.log('not done');
-        }
-    }
+    displayScore() {
+        if(this.state.score > this.state.userTimePrediction) {
+            return (
+                //We also want to adjust our score from seconds into mins,
 
+                <Text style={{color:'red',fontSize:20}}>{this.state.score}</Text>
+            )
+        } else {
+            return (
+                <Text style={{color:'white',fontSize:20}}>{this.state.score}</Text>
+            )
+        }
+            
+   
+    }
     render() {
-        console.log(this.state.finishedRace);
-        var userScore = 0;
         return (
             <View>
                 <View style={playerCardsStyle.container}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <Text style={{color:'white', textAlign:'left', fontSize:20}}>{this.props.name}</Text>
-                        <Text style={{color:'white'}}>TestFin: {this.state.finishTime}</Text>
+                        <Text style={{color:'white'}}>Finish Time : {this.state.finishTime}</Text>
                     </View>
-                    <Text style={{color:'white',fontSize:20}}>{this.state.score}</Text>
+                    {this.displayScore()}
+                    {/* <Text style={{color:'white',fontSize:20}}>{this.displayScore()}</Text> */}
                     <Text style={{color:'white'}}>Bike Number : {this.props.bike}</Text>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <Text style={{color:'white', paddingBottom:10}}>Prediction :{this.props.timeValue} </Text>
@@ -82,7 +89,7 @@ export default class PlayerCards extends Component {
                     </View>
                     {/*Rendering the buton*/}
                     {this.renderButtonMode()}
-                    {this.determineRace()}
+                    
                 </View>
             </View>
         )
