@@ -14,6 +14,7 @@ export default class App extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      inputsActive: false,
       nameBuffer: ' ',
       bikeBuffer: ' ',
       timeBuffer: ' ',
@@ -39,7 +40,42 @@ export default class App extends Component{
       ]
     }
   }
-
+  displayInputSwitch = () => {
+    this.setState({inputsActive:!(this.state.inputsActive)});
+  }
+  displayInputsSection() {
+    if(this.state.inputsActive) {
+      return (
+        <React.Fragment>
+          <TextInput 
+            placeholderTextColor='white' 
+            style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
+            placeholder="Enter name"
+            onChangeText={(text) => this.setState({nameBuffer:text})} 
+            clearButtonMode='always'
+          />
+          <TextInput 
+            placeholderTextColor='white' 
+            style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
+            placeholder="Enter Bike #"
+            onChangeText={(text) => this.setState({bikeBuffer:text})}  
+          />
+          <TextInput 
+            placeholderTextColor='white' 
+            style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
+            placeholder="Enter Time"
+            onChangeText={(text) => this.setState({timeBuffer:text})}  
+          />
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <View>
+          <Text>Test</Text>
+        </View>
+      )
+    }
+  }
   /*I need to fix the hardcoded key pairs :(*/
   render() {
     showData = () => {
@@ -75,8 +111,13 @@ export default class App extends Component{
                 <Text style={{color:'white'}}>Bike Number</Text>
                 <Text style={{paddingLeft:15, color:'white'}}>Prediction</Text> 
               </View>
+              {/*The input switch would have to be integrated here, maybe
+                by creating a member method, we can build it out. but the issue would be 
+                  involved with the inputs, and the button that would switch it. and I would
+                  need to add a state just for the inputs. local to this class.*/}
               <View style={inputAreaStyle.inputs}>
-                <TextInput 
+                  {this.displayInputsSection()}
+                {/* <TextInput 
                   placeholderTextColor='white' 
                   style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
                   placeholder="Enter name"
@@ -94,9 +135,10 @@ export default class App extends Component{
                   style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
                   placeholder="Enter Time"
                   onChangeText={(text) => this.setState({timeBuffer:text})}  
-                />
+                /> */}
               </View>
               {/*The button below will submit the adding of a cyclist to the race, and will be added to the array.*/}
+              <Button color='rgba(52,52,52,0.8)' onPress={this.displayInputSwitch} title="Toggle" />
               <Button color='#990000' title="Submit"  onPress={showData}/> 
             </View>
             
@@ -128,5 +170,8 @@ const inputAreaStyle = StyleSheet.create({
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between'
-  }, 
+  },
+  notShowing: {
+
+  } 
 })
