@@ -8,7 +8,7 @@ export default class PlayerCards extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userKey: this.props.key,
+            
             userName: this.props.name,
             userBikeNumber: this.props.bike,
             userTimePrediction: this.props.timeValue,
@@ -35,6 +35,7 @@ export default class PlayerCards extends Component {
             var finalScore = finishSeconds - this.state.startSeconds;
             finalScore = finalScore / 1000;
             finalScore = finalScore / 60;
+            finalScore = finalScore.toFixed(3);
             this.setState({score:finalScore});
             this.setState({finishTime:finish});
             this.setState({finishedRace:true});
@@ -62,11 +63,11 @@ export default class PlayerCards extends Component {
             return (
                 //We also want to adjust our score from seconds into mins,
 
-                <Text style={{color:'red',fontSize:20}}>{this.state.score}</Text>
+                <Text style={{color:'red',fontSize:20}}>Mins: {this.state.score}</Text>
             )
         } else {
             return (
-                <Text style={{color:'white',fontSize:20}}>{this.state.score}</Text>
+                <Text style={{color:'white',fontSize:20}}>Mins: {this.state.score}</Text>
             )
         }
             

@@ -14,10 +14,10 @@ export default class App extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      keyValue: 1,
       namePlaceHolder:'Enter Name',
       bikePlaceHolder:'Enter bike number',
       timePlaceHolder:'Enter time',
-      testing:"test",
       inputsActive: false,
       nameBuffer: ' ',
       bikeBuffer: ' ',
@@ -95,11 +95,12 @@ export default class App extends Component{
   render() {
     showData = () => {
       var tempArray = this.state.playerArray;
+      this.setState({keyValue:this.state.keyValue + 1});
       if(this.state.nameBuffer == ' ' || this.state.timeBuffer == ' ') {
         Alert.alert("Please Fill in the inputs!");
       } else {
         tempArray.push({
-          id: this.state.playerArray.length,
+          id: this.state.keyValue,
           name:this.state.nameBuffer,
           bikeNumber:this.state.bikeBuffer,
           time:this.state.timeBuffer
