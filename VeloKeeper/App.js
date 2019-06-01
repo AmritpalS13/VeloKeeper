@@ -43,6 +43,17 @@ export default class App extends Component{
   displayInputSwitch = () => {
     this.setState({inputsActive:!(this.state.inputsActive)});
   }
+  displayTextForInputs = () => {
+    if(this.state.inputsActive) {
+      return (
+        <View style={inputAreaStyle.inputs}>
+          <Text style={{paddingLeft:15, color:'white'}}>Name</Text>
+          <Text style={{color:'white'}}>Bike Number</Text>
+          <Text style={{paddingLeft:15, color:'white'}}>Prediction</Text> 
+        </View>
+      );
+    }
+  }
   displayInputsSection() {
     if(this.state.inputsActive) {
       return (
@@ -106,11 +117,12 @@ export default class App extends Component{
           <HeaderPage />
             {/*This will be a testing of the input section*/}
             <View style={inputAreaStyle.container}>
-              <View style={inputAreaStyle.inputs}>
+              {this.displayTextForInputs()}
+              {/* <View style={inputAreaStyle.inputs}>
                 <Text style={{paddingLeft:15, color:'white'}}>Name</Text>
                 <Text style={{color:'white'}}>Bike Number</Text>
                 <Text style={{paddingLeft:15, color:'white'}}>Prediction</Text> 
-              </View>
+              </View> */}
               {/*The input switch would have to be integrated here, maybe
                 by creating a member method, we can build it out. but the issue would be 
                   involved with the inputs, and the button that would switch it. and I would
