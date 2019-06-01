@@ -14,6 +14,10 @@ export default class App extends Component{
   constructor(props) {
     super(props);
     this.state = {
+      namePlaceHolder:'Enter Name',
+      bikePlaceHolder:'Enter bike number',
+      timePlaceHolder:'Enter time',
+      testing:"test",
       inputsActive: false,
       nameBuffer: ' ',
       bikeBuffer: ' ',
@@ -61,20 +65,20 @@ export default class App extends Component{
           <TextInput 
             placeholderTextColor='white' 
             style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
-            placeholder="Enter name"
+            placeholder={this.state.namePlaceHolder}
             onChangeText={(text) => this.setState({nameBuffer:text})} 
             clearButtonMode='always'
           />
           <TextInput 
             placeholderTextColor='white' 
             style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
-            placeholder="Enter Bike #"
+            placeholder={this.state.timePlaceHolder}
             onChangeText={(text) => this.setState({bikeBuffer:text})}  
           />
           <TextInput 
             placeholderTextColor='white' 
             style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
-            placeholder="Enter Time"
+            placeholder={this.state.timePlaceHolder}
             onChangeText={(text) => this.setState({timeBuffer:text})}  
           />
         </React.Fragment>
@@ -101,6 +105,9 @@ export default class App extends Component{
           time:this.state.timeBuffer
         });
         this.setState({
+          namePlaceHolder: 'Enter Name.',
+          bikePlaceHolder: 'Enter bike number.',
+          timePlaceHolder: 'Enter time.',
           nameBuffer: ' ',
           bikeBuffer: ' ',
           timeBuffer: ' '
@@ -122,7 +129,7 @@ export default class App extends Component{
                   {this.displayInputsSection()}
               </View>
               {/*The button below will submit the adding of a cyclist to the race, and will be added to the array.*/}
-              <Button color='rgba(52,52,52,0.8)' onPress={this.displayInputSwitch} title="Toggle" />
+              <Button color='rgba(52,52,52,0.8)' onPress={this.displayInputSwitch} title="Input Section" />
               <Button color='#990000' title="Submit"  onPress={showData}/> 
             </View>
           <ScrollView>
