@@ -40,21 +40,25 @@ export default class App extends Component{
     }
   }
 
+  /*I need to fix the hardcoded key pairs :(*/
   render() {
     showData = () => {
       var tempArray = this.state.playerArray;
-      tempArray.push({
-        id: 5,
-        name:this.state.nameBuffer,
-        bikeNumber:this.state.bikeBuffer,
-        time:this.state.timeBuffer
-      });
-      this.setState({
-        nameBuffer: ' ',
-        bikeBuffer: ' ',
-        timeBuffer: ' '
-      });
-      
+      if(this.state.nameBuffer == ' ' || this.state.timeBuffer == ' ') {
+        Alert.alert("Please Fill in the inputs!");
+      } else {
+        tempArray.push({
+          id: this.state.playerArray.length,
+          name:this.state.nameBuffer,
+          bikeNumber:this.state.bikeBuffer,
+          time:this.state.timeBuffer
+        });
+        this.setState({
+          nameBuffer: ' ',
+          bikeBuffer: ' ',
+          timeBuffer: ' '
+        });
+    }
     }
     return (
       <View style={{flex:2,backgroundColor:'#737373'}}>
