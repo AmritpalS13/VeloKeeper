@@ -115,49 +115,18 @@ export default class App extends Component{
         <ImageBackground source={require('./Assets/cf.png')} style={{flex:1}}>
           {/*Below is going to be the header for the app.*/}
           <HeaderPage />
-            {/*This will be a testing of the input section*/}
+            {/*This is going to be the input  section of the app, where the user can input new cyclist's*/}
             <View style={inputAreaStyle.container}>
               {this.displayTextForInputs()}
-              {/* <View style={inputAreaStyle.inputs}>
-                <Text style={{paddingLeft:15, color:'white'}}>Name</Text>
-                <Text style={{color:'white'}}>Bike Number</Text>
-                <Text style={{paddingLeft:15, color:'white'}}>Prediction</Text> 
-              </View> */}
-              {/*The input switch would have to be integrated here, maybe
-                by creating a member method, we can build it out. but the issue would be 
-                  involved with the inputs, and the button that would switch it. and I would
-                  need to add a state just for the inputs. local to this class.*/}
               <View style={inputAreaStyle.inputs}>
                   {this.displayInputsSection()}
-                {/* <TextInput 
-                  placeholderTextColor='white' 
-                  style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
-                  placeholder="Enter name"
-                  onChangeText={(text) => this.setState({nameBuffer:text})} 
-                  clearButtonMode='always'
-                />
-                <TextInput 
-                  placeholderTextColor='white' 
-                  style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
-                  placeholder="Enter Bike #"
-                  onChangeText={(text) => this.setState({bikeBuffer:text})}  
-                />
-                <TextInput 
-                  placeholderTextColor='white' 
-                  style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
-                  placeholder="Enter Time"
-                  onChangeText={(text) => this.setState({timeBuffer:text})}  
-                /> */}
               </View>
               {/*The button below will submit the adding of a cyclist to the race, and will be added to the array.*/}
               <Button color='rgba(52,52,52,0.8)' onPress={this.displayInputSwitch} title="Toggle" />
               <Button color='#990000' title="Submit"  onPress={showData}/> 
             </View>
-            
           <ScrollView>
             <PlayerManager info={this.state.playerArray}/>
-            {/* <CardHandler userData={this.state.playerArray}/> */}
-      
           </ScrollView>
 
         </ImageBackground>
@@ -172,10 +141,7 @@ const inputAreaStyle = StyleSheet.create({
     paddingBottom:8,
     borderBottomWidth:2,
     borderBottomColor:'#fdb722',
-    // flexDirection:'row',
     backgroundColor:'#161514',
-    // alignItems:'center',
-    // justifyContent:'space-between'
   },
   inputs: {
     color:'white',
