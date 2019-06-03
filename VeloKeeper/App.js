@@ -23,24 +23,7 @@ export default class App extends Component{
       bikeBuffer: ' ',
       timeBuffer: ' ',
       playerArray: [
-      {
-        id:1,
-        name:'Paul', 
-        bikeNumber:'13', 
-        time:'13.00'
-      },
-      {
-        id:2,
-        name:'Chris froome', 
-        bikeNumber:'13', 
-        time:'13.00'
-      },
-      {
-        id:3,
-        name:'Sara', 
-        bikeNumber:'13', 
-        time:'13.00'
-      }
+
       ]
     }
   }
@@ -72,7 +55,7 @@ export default class App extends Component{
           <TextInput 
             placeholderTextColor='white' 
             style={{color:'white', borderWidth:2, borderColor:'grey', borderRadius:75}}
-            placeholder={this.state.timePlaceHolder}
+            placeholder={this.state.bikePlaceHolder}
             onChangeText={(text) => this.setState({bikeBuffer:text})}  
           />
           <TextInput 

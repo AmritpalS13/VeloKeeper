@@ -35,6 +35,8 @@ export default class PlayerCards extends Component {
             var finalScore = finishSeconds - this.state.startSeconds;
             finalScore = finalScore / 1000;
             finalScore = finalScore / 60;
+            finalScore = parseFloat(this.state.userTimePrediction) - finalScore;
+            
             finalScore = finalScore.toFixed(3);
             this.setState({score:finalScore});
             this.setState({finishTime:finish});
@@ -59,15 +61,14 @@ export default class PlayerCards extends Component {
         }
     }
     displayScore() {
-        if(this.state.score > this.state.userTimePrediction) {
+        if(this.state.score < 0) {
             return (
-                //We also want to adjust our score from seconds into mins,
-
-                <Text style={{color:'red',fontSize:20}}>Mins: {this.state.score}</Text>
+                //We also want to adjust our score from seconds into mins,   
+                <Text style={{color:'#ff5050',fontSize:20}}>Down: {this.state.score * -1}</Text>
             )
         } else {
             return (
-                <Text style={{color:'white',fontSize:20}}>Mins: {this.state.score}</Text>
+                <Text style={{color:'#4dff4d',fontSize:20}}>Up: {this.state.score}</Text>
             )
         }
             
